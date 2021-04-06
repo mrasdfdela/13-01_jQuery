@@ -5,9 +5,10 @@ let movieList = $('ul')
 
 function addMovie(){
   const btnDiv = $('<button>').text('delete');
-  movieName = movieNameInput.val();
-  movieRating = movieRatingInput.val();
-  newMovie = $("<li>").append(
+  const movieName = movieNameInput.val();
+  const movieRating = movieRatingInput.val();
+
+  const newMovie = $("<li>").append(
     `${movieName}: ${movieRating} `,
     btnDiv
   );
@@ -17,9 +18,13 @@ function addMovie(){
 
 submitBtn.on("click", function (e) {
   e.preventDefault();
-  addMovie();
-  movieNameInput.attr("value", "");
-  movieRatingInput.attr("value", "");
+  if (movieNameInput.val().length >= 2) {
+    addMovie();
+    movieNameInput.attr("value", "");
+    movieRatingInput.attr("value", "");
+  } else {
+    alert('invalid movie name!')
+  }
 });
 
 movieList.on('click', 'button', function(e) {
